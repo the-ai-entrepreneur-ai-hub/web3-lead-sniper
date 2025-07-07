@@ -1,0 +1,23 @@
+{
+  "name": "web3-prospector-server",
+  "version": "1.0.0",
+  "description": "Server for the Web3 Prospector tool.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.11.1",
+    "airtable": "^0.12.2",
+    "bcrypt": "^6.0.0",
+    "bullmq": "^5.56.1",
+    "cors": "^2.8.5",
+    "dotenv": "^17.0.1",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "prisma": "^6.11.1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
