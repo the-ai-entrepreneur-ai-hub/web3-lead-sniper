@@ -13,10 +13,10 @@ const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
             <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center animate-pulse">
-              <span className="text-primary-foreground font-bold text-sm">W3</span>
+              <span className="text-primary-foreground font-bold text-sm">W3R</span>
             </div>
             <span className="text-xl font-bold text-foreground">
-              Web3<span className="text-primary">Leads</span>
+              Web3<span className="text-primary">Radar</span>
             </span>
           </Link>
 
