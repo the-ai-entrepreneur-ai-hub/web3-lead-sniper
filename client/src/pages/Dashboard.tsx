@@ -35,6 +35,7 @@ const Dashboard = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [user, setUser] = useState<User | null>(null);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
+  const [visibleProjects, setVisibleProjects] = useState(6);
   const profileModalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -98,7 +99,7 @@ const Dashboard = () => {
       return;
     }
     const headers = Object.keys(projects[0]);
-    const csvContent = "data:text/csv;charset=utf-8," 
+    const csvContent = "data:text/csv;charset=utf-8,"
       + headers.join(",") + "\n"
       + projects.map(p => headers.map(header => `"${p[header as keyof Project]}"`).join(",")).join("\n");
     const encodedUri = encodeURI(csvContent);
@@ -107,6 +108,10 @@ const Dashboard = () => {
     link.setAttribute("download", "projects.csv");
     document.body.appendChild(link);
     link.click();
+  };
+
+  const handleLoadMore = () => {
+    setVisibleProjects(prevVisibleProjects => prevVisibleProjects + 6);
   };
 
   const categories = ["All", "New Lead", "Contacted", "In-progress", "Closed"];
@@ -229,7 +234,7 @@ const Dashboard = () => {
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {filteredProjects.map((project) => (
+          {filteredProjects.slice(0, visibleProjects).map((project) => (
             <Card key={project["Lead ID"]} className="card-web3 hover:glow-effect">
               <CardHeader>
                 <div className="flex items-start justify-between">
@@ -261,7 +266,7 @@ const Dashboard = () => {
                 <div className="space-y-2">
                   <div className="text-sm">
                     <span className="text-muted-foreground">Website:</span>
-                    <a href={project.Website} target="_blank" rel="noopener noreferrer" 
+                    <a href={project.Website} target="_blank" rel="noopener noreferrer"
                        className="ml-2 text-primary hover:underline">
                       {project.Website}
                     </a>
@@ -292,11 +297,13 @@ const Dashboard = () => {
         </div>
 
         {/* Load More */}
-        <div className="text-center mt-12">
-          <Button size="lg" variant="outline" className="px-8">
-            Load More Projects
-          </Button>
-        </div>
+        {visibleProjects < filteredProjects.length && (
+          <div className="text-center mt-12">
+            <Button size="lg" variant="outline" className="px-8" onClick={handleLoadMore}>
+              Load More Projects
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );
