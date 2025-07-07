@@ -7,6 +7,15 @@ const Hero = () => {
 
   return (
     <section className="min-h-screen flex items-center justify-center hero-bg network-bg relative overflow-hidden">
+      {/* Hero Background Image */}
+      <div className="absolute inset-0 flex items-center justify-center opacity-20">
+        <img 
+          src="/lovable-uploads/398ca217-7313-49b0-a990-12400b5781dc.png" 
+          alt="Web3 Radar Visualization" 
+          className="w-full h-full object-contain max-w-4xl"
+        />
+      </div>
+      
       {/* Floating Elements */}
       <div className="absolute top-20 left-20 w-4 h-4 bg-primary rounded-full animate-float opacity-60"></div>
       <div className="absolute top-32 right-32 w-6 h-6 bg-primary rounded-full animate-float opacity-40" style={{animationDelay: '1s'}}></div>
@@ -16,7 +25,7 @@ const Hero = () => {
         {/* Main Hero Content */}
         <div className="mb-8">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent">
-            Web3 Lead
+            Web3<span className="text-primary">Radar</span>
             <span className="block text-glow">Discovery</span>
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
