@@ -1,0 +1,13 @@
+{
+    "actorSpecification": 1,
+    "name": "unblockable-ico-drops-scraper",
+    "title": "Unblockable ICO Drops Scraper",
+    "description": "A robust actor that scrapes project data and social links from ICO Drops.",
+    "version": "1.0",
+    "meta": {
+        "templateId": "js-crawlee-playwright-chrome"
+    },
+    "dockerfile": "./Dockerfile",
+    "input": "./input_schema.json",
+    "readme": "file:./README.md"
+}
