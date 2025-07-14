@@ -1,6 +1,6 @@
 {
-	"name": "unblockable-ico-drops-scraper",
-	"version": "1.3.0",
+	"name": "unblockable-ico-drops-scraper-clone",
+	"version": "0.0",
 	"type": "module",
 	"description": "This is an example of an Apify Actor.",
 	"dependencies": {

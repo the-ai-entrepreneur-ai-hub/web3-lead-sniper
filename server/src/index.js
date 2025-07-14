@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 require('dotenv').config();
+const { addLeadToQueue } = require('./services/queue');
+const { scheduleIngestion, triggerManualIngestion, getScheduleStatus } = require('./services/scheduler');
 
 const app = express();
 const port = 3006;
@@ -130,6 +132,46 @@ app.get('/seed', async (req, res) => {
   }
 });
 
+app.post('/api/v1/leads/start-ingestion', async (req, res) => {
+  try {
+    // This job will be picked up by the worker to start the scraping process
+    await addLeadToQueue('start-ingestion', { 
+      type: 'manual-api',
+      timestamp: new Date().toISOString()
+    });
+    res.status(202).json({ message: 'Lead ingestion process started.' });
+  } catch (error) {
+    console.error('Error starting lead ingestion:', error);
+    res.status(500).json({ error: 'Failed to start lead ingestion.' });
+  }
+});
+
+// New endpoint for manual ingestion trigger
+app.post('/api/v1/leads/trigger-manual', async (req, res) => {
+  try {
+    await triggerManualIngestion();
+    res.status(202).json({ message: 'Manual lead ingestion triggered.' });
+  } catch (error) {
+    console.error('Error triggering manual ingestion:', error);
+    res.status(500).json({ error: 'Failed to trigger manual ingestion.' });
+  }
+});
+
+// New endpoint for scheduler status
+app.get('/api/v1/scheduler/status', (req, res) => {
+  try {
+    const status = getScheduleStatus();
+    res.json(status);
+  } catch (error) {
+    console.error('Error getting scheduler status:', error);
+    res.status(500).json({ error: 'Failed to get scheduler status.' });
+  }
+});
+
+// Initialize scheduler
+scheduleIngestion();
+
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
+  console.log('🤖 Automated scheduling is active');
 });

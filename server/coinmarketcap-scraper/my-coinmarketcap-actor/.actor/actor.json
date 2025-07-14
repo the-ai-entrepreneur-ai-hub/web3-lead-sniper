@@ -1,0 +1,21 @@
+{
+	"actorSpecification": 1,
+	"name": "working-cmc-scraper",
+	"title": "Working CoinMarketCap Scraper",
+	"description": "Scrapes newly listed coins and their social media links from CoinMarketCap.",
+	"version": "1.0",
+	"input": {
+		"title": "Scraper Settings",
+		"type": "object",
+		"schema": {
+			"properties": {
+				"maxItems": {
+					"title": "How many new coins to scrape?",
+					"type": "integer",
+					"description": "The actor will process this many coins from the top of the 'Recently Added' list.",
+					"default": 50
+				}
+			}
+		}
+	}
+}

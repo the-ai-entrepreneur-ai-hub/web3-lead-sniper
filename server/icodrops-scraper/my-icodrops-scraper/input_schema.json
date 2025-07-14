@@ -1,0 +1,14 @@
+{
+  "title": "ICO Drops Scraper Input",
+  "description": "Input schema for the ICO Drops Scraper actor.",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "debug": {
+      "title": "Debug mode",
+      "type": "boolean",
+      "description": "Enable debug mode to get more verbose logging.",
+      "default": false
+    }
+  }
+}
